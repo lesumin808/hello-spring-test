@@ -3,12 +3,18 @@ package hello.hellospringtest.service;
 import hello.hellospringtest.domain.Member;
 import hello.hellospringtest.repository.MemberRepository;
 import hello.hellospringtest.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
 public class MemberService {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
+
+    //@Autowired//생성자를 넣고 위에 sevice에 autowired를 해줘서 연결이 된다.
+    public MemberService(MemberRepository memberRepository) {//외부에서 넣어주도록 DI
+        this.memberRepository = memberRepository;
+    }
 
     /*회원가입*/
     public long join(Member member) {
